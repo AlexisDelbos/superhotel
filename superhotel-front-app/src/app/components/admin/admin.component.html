@@ -1,0 +1,118 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="text-center mb-4">Page d'Administration</h2>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-warning text-white">
+          <h5 class="card-title">Gestion des Hôtels</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            Consulter, ajouter ou modifier des hôtels existants.
+          </p>
+          <a href="#" routerLink="/hotels" class="btn btn-primary w-100"
+            >Voir la liste des hôtels</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-info text-white">
+          <h5 class="card-title">Gestion des Managers</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            Créer un manager
+            </p>
+          <a href="#" routerLink="/manager" class="btn btn-primary w-100"
+            >Ajouter un manager</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+          <h5 class="card-title">Créer une ville </h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            Ajouter une ville
+          </p>
+          <a href="#" routerLink="/city" class="btn btn-primary w-100"
+            >Ajouter une ville</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-danger text-white">
+          <h5 class="card-title">Ajouter un Hôtel</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">Ajouter un nouvel hôtel à la base de données.</p>
+          <a href="#" routerLink="/edithotel" class="btn btn-primary w-100"
+            >Ajouter un hôtel</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header bg-dark text-white">
+          <h5 class="card-title">Liste des Hôtels</h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Ville</th>
+                <th>Étoiles</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let hotel of hotels">
+                <td>{{ hotel.id }}</td>
+                <td>{{ hotel.name }}</td>
+                <td>{{ hotel.city.name }}</td>
+                <td>{{ hotel.stars }}</td>
+                <td>
+                  <a
+                    href="#"
+                    routerLink="/edithotel/{{ hotel.id }}"
+                    class="btn btn-warning btn-sm"
+                    >Modifier</a
+                  >
+                  <button
+                    (click)="deleteHotel(hotel.id)"
+                    class="btn btn-danger btn-sm"
+                  >
+                    Supprimer
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

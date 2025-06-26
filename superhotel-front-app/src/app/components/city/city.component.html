@@ -1,0 +1,36 @@
+<div class="container mt-4">
+    <div>
+      <div style="display: flex; justify-content: center">
+        <form [formGroup]="myFormCity" (ngSubmit)="onAddCity()" #cityForm="ngForm"
+          style="
+            width: 70%;
+            background-color: #f7f7f7;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+          "
+        >
+          <h2 class="text-center mb-4" style="color: #444">
+            Ajout d'une ville
+          </h2>
+          
+          <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Nom de la ville :</label>
+            <div class="col-sm-8">
+              <input type="text" id="name" formControlName="name" class="form-control" required>
+            </div>
+          </div>
+          
+          <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Pays :</label>
+            <div class="col-sm-8">
+              <input type="text" id="country" formControlName="country" class="form-control" required>
+            </div>
+          </div>
+        
+          <button type="submit" class="btn btn-warning w-100" [disabled]="cityForm.invalid">Ajouter la ville</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

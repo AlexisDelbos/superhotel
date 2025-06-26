@@ -1,0 +1,51 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="text-center mb-4">Créer un Manager</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card shadow-sm">
+        <div class="card-header bg-info text-white">
+          <h5 class="card-title">Formulaire de création d'un manager</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myForm" (ngSubmit)="onAddManager()">
+            <div class="mb-3">
+              <label for="username" class="form-label">Nom d'utilisateur</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                formControlName="username"
+                required
+              />
+              <div *ngIf="myForm.controls['username'].invalid && myForm.controls['username'].touched" class="text-danger">
+                Le nom d'utilisateur est requis.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Mot de passe</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                formControlName="password"
+                required
+              />
+              <div *ngIf="myForm.controls['password'].invalid && myForm.controls['password'].touched" class="text-danger">
+                Le mot de passe est requis.
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100" [disabled]="myForm.invalid">
+              Créer le Manager
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

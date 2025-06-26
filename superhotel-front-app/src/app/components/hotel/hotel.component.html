@@ -1,0 +1,50 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+/>
+
+<div class="container mt-4" *ngIf="hotel">
+  <div class="card mx-auto" style="max-width: 600px">
+    <img
+      *ngIf="hotel.image"
+      [src]="hotel.image"
+      class="card-img-top"
+      [alt]="hotel.name"
+      style="height: 300px; object-fit: cover"
+    />
+    <img
+      *ngIf="!hotel.image"
+      src="http://localhost:8080/images/none.png"
+      class="card-img-top"
+      [alt]="hotel.name"
+      style="height: 300px; object-fit: cover"
+    />
+    <div class="card-body">
+      <h5 class="card-title">
+        {{ hotel.name }}
+        <span
+          class="stars"
+          style="position: absolute; right: 1rem; top: 19.4rem; color: gold"
+        >
+          <i class="fas fa-star"></i> {{ hotel.stars }}
+        </span>
+      </h5>
+      <p class="card-text">
+        <strong>Adresse :</strong> {{ hotel.address }} - {{ hotel.city.name }} -
+        {{ hotel.city.country }}
+      </p>
+      <p class="card-text"><strong>Téléphone :</strong> {{ hotel.phone }}</p>
+      <p class="card-text"><strong>Prix : </strong> {{ hotel.price }}€</p>
+      <a routerLink="/" class="btn btn-secondary">Retour à la liste</a>
+
+      <div *ngIf="isAdmin || isManager " class="mt-3">
+        <button class="btn btn-warning me-2" (click)="editHotel()">
+          Modifier
+        </button>
+        <button *ngIf="isAdmin" class="btn btn-danger" (click)="onDeleteHotel(hotel)">
+          Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,161 @@
+<div class="container mt-4" *ngIf="hotel">
+  <div>
+    <div style="display: flex; justify-content: center">
+      <form
+        [formGroup]="myForm"
+        (ngSubmit)="onAddHotel(myForm)"
+        style="
+          width: 70%;
+          background-color: #f7f7f7;
+          border-radius: 10px;
+          padding: 30px;
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        "
+      >
+        <h2 class="text-center mb-4" *ngIf="!status" style="color: #444">
+          Ajout d'un hôtel
+        </h2>
+        <h2 class="text-center mb-4" *ngIf="status" style="color: #444">
+          Modification d'un hôtel
+        </h2>
+
+        <div *ngIf="myForm.value.id" class="row mb-3">
+          <label class="col-sm-4 col-form-label">Id : </label>
+          <div class="col-sm-8">
+            <input
+              id="id"
+              type="text"
+              formControlName="id"
+              class="form-control"
+              readonly
+              style="background-color: #e9ecef; border: 1px solid #ccc"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label">Nom de l'hôtel : </label>
+          <div class="col-sm-8">
+            <input type="text" formControlName="name" class="form-control" />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label">Adresse : </label>
+          <div class="col-sm-8">
+            <input type="text" formControlName="address" class="form-control" />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label">Téléphone : </label>
+          <div class="col-sm-8">
+            <input type="text" formControlName="phone" class="form-control" />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label">Prix : </label>
+          <div class="col-sm-8">
+            <input
+              type="number"
+              formControlName="price"
+              min="0"
+              max="999"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label">Nombre d'étoiles : </label>
+          <div class="col-sm-8">
+            <input
+              type="number"
+              formControlName="stars"
+              min="1"
+              max="5"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label">Chambres disponibles : </label>
+          <div class="col-sm-8">
+            <input
+              type="number"
+              formControlName="availableRooms"
+              min="0"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label">Image :</label>
+          <div class="col-sm-8">
+            <input
+              type="file"
+              (change)="onFileSelected($event)"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <img
+        *ngIf="hotel.image"
+        [src]="hotel.image"
+        class="card-img-top"
+        [alt]="hotel.name"
+        style="max-height: 200px; width: auto; object-fit: cover;"
+        width="200"
+      />
+      
+        <!-- Ville -->
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label">Ville :</label>
+          <div class="col-sm-8">
+            <select formControlName="city" class="form-select">
+              <option value="" disabled selected>Sélectionnez une ville</option>
+              <option *ngFor="let city of cities" [value]="city.id">
+                {{ city.name }} - {{ city.country }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Manager -->
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label">Manager :</label>
+          <div class="col-sm-8">
+            <select formControlName="managerId" class="form-select">
+              <option value="" disabled selected>
+                Sélectionnez un manager
+              </option>
+              <option *ngFor="let manager of managers" [value]="manager.id">
+                {{ manager.username }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div *ngIf="authService.isAdmin()">
+          <button
+            *ngIf="!status"
+            type="submit"
+            class="btn btn-warning w-100 mb-3"
+          >
+            Ajouter en Base
+          </button>
+          <button
+            *ngIf="status"
+            type="submit"
+            class="btn btn-success w-100 mb-3"
+          >
+            Mise à jour
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
