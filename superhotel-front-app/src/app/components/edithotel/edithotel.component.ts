@@ -31,7 +31,7 @@ export class EdithotelComponent {
     public authService: AuthenticateService,
     private formBuilder: FormBuilder
   ) {
-    this.hotel = new Hotel(0, "", "", "", 0, "", 0, 0, new City(0, "", "", []), []);
+    this.hotel = new Hotel(0, "", "", "", 0, "", 0, 0,"",new City(0, "", "", []), []);
     this.myForm = this.formBuilder.group({
       id: [this.hotel.id],
       name: [this.hotel.name, Validators.required],
