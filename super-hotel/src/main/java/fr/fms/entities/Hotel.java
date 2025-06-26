@@ -29,9 +29,9 @@ public class Hotel implements Serializable {
     private String image;
     private int stars;
     private int availableRooms;
+    private int totalRooms;
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "hotels")
     private Collection<User> managers = new ArrayList<>();
-
 
     @ManyToOne
     private City city;

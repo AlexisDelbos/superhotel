@@ -8,4 +8,10 @@ import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<Review> findByName(Hotel hotel);
+
+    double averageRatingByHotel(Hotel hotel);
+
+    long countByHotel(Hotel hotel);
+
+    List<Review> findByHotel(Hotel hotel);
 }
