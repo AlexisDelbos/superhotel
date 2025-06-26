@@ -126,9 +126,9 @@ public class ImplHotelService implements IHotelService{
                 hotel.setRecommendation("No recommendation available at the moment.");
             }
         }
-        List<RecommandationDto>  recommandationDto =  hotels.stream().map(hotel -> {
+        List<RecommandationDto> recommandationDto = hotels.stream().map(hotel -> {
             int occupancyRate = (int) Math.ceil(
-                    (double) hotel.getAvailableRooms() / hotel.getTotalRooms() * 100
+                    ((double)(hotel.getTotalRooms() - hotel.getAvailableRooms()) / hotel.getTotalRooms()) * 100
             );
 
             return new RecommandationDto(hotel.getName(), hotel.getCity().getName(), occupancyRate, hotel.getRecommendation());
