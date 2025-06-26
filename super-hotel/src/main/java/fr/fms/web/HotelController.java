@@ -1,6 +1,7 @@
 package fr.fms.web;
 
 import fr.fms.dao.HotelRepository;
+import fr.fms.dto.RecommandationDto;
 import fr.fms.entities.City;
 import fr.fms.entities.Hotel;
 import fr.fms.entities.User;
@@ -188,5 +189,13 @@ public class HotelController {
         return ResponseEntity.ok(updatedHotel);
     }
 
+    @GetMapping("/getrecommandation")
+    public ResponseEntity<List<RecommandationDto>> getRecommandation() {
+        List<RecommandationDto> hotels =  hotelService.getHotelsSortedByRating();
+        if (hotels.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(hotels);
+    }
 
 }
