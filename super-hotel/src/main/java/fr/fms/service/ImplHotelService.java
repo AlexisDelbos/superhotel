@@ -3,6 +3,7 @@ package fr.fms.service;
 import fr.fms.dao.CityRepository;
 import fr.fms.dao.HotelRepository;
 import fr.fms.dao.UserRepository;
+import fr.fms.dto.RecommandationDto;
 import fr.fms.entities.City;
 import fr.fms.entities.Hotel;
 import fr.fms.entities.User;
@@ -19,6 +20,9 @@ import java.util.Optional;
 @Transactional
 public class ImplHotelService implements IHotelService{
 
+    private final AiService aiService;
+
+    private static  String prompt= "";
 
     @Autowired
     private HotelRepository hotelRepository;
@@ -28,6 +32,10 @@ public class ImplHotelService implements IHotelService{
 
     @Autowired
     private UserRepository userRepository;
+
+    public ImplHotelService(AiService aiService) {
+        this.aiService = aiService;
+    }
 
 
     @Override
@@ -101,7 +109,32 @@ public class ImplHotelService implements IHotelService{
         hotel.getManagers().add(manager);
         hotelRepository.save(hotel);
     }
+// ---------------------------------------- IA
 
 
+    public List<RecommandationDto> getHotelsSortedByRating() {
+        List<Hotel> hotels = hotelRepository.findAll();
+
+        for (Hotel hotel : hotels) {
+            prompt = "repond en francais et dis moi  ,pour chaque hotel, fais moi une recommandation en fonction de son nom et de sa note et par rapport au taux d'occupation entre le totalroom et availableroom  :\nHotel: " + hotel.getCity().getName() + ", Rating: " + hotel.getStars() + ", Name: " + hotel.getName() + "\n";
+            try {
+                String response = aiService.chat(prompt);
+                hotel.setRecommendation(response.trim());
+                System.out.println("Generated recommendation for hotel: " + hotel.getName());
+            } catch (Exception e) {
+                System.err.println("Error generating recommendation for hotel: " + hotel.getName());
+                hotel.setRecommendation("No recommendation available at the moment.");
+            }
+        }
+        List<RecommandationDto> recommandationDto = hotels.stream().map(hotel -> {
+            int occupancyRate = (int) Math.ceil(
+                    ((double)(hotel.getTotalRooms() - hotel.getAvailableRooms()) / hotel.getTotalRooms()) * 100
+            );
+
+            return new RecommandationDto(hotel.getName(), hotel.getCity().getName(), occupancyRate, hotel.getRecommendation());
+        }).sorted(Comparator.comparingInt(RecommandationDto::occupancyRate).reversed()).toList();
+        hotelRepository.saveAll(hotels);
+        return recommandationDto;
+    }
 
 }

@@ -32,8 +32,8 @@ public class SuperHotelApplication implements CommandLineRunner {
 
     @Override
     public void run(String...args) throws Exception{
-        dataUsers();
-        dataCity();
+        // dataUsers();
+        // dataCity();
     }
 
     private void dataUsers(){
@@ -63,19 +63,20 @@ public class SuperHotelApplication implements CommandLineRunner {
         City washington = hotelService.saveCity(new City(null, "Washington", "Etats-Unis", new ArrayList<>()));
 
         hotelService.saveHotel(new Hotel(null, "Hotel Eiffel", "0625871397", 490.00,
-                "2 boulevard de l'eiffel", "http://localhost:8080/images/hotelEiffel.jpg", 5, 20, new ArrayList<>(), paris));
+                "2 boulevard de l'eiffel", "http://localhost:8080/images/hotelEiffel.jpg", 5, 20, new ArrayList<>(), paris, "",50));
+
 
         hotelService.saveHotel(new Hotel(null, "Hotel Velodrome", "0629393430", 50.00,
-                "2 boulevard de la cannebière", "http://localhost:8080/images/hotelCannebiere.jpg", 2, 10, new ArrayList<>(), marseille));
+                "2 boulevard de la cannebière", "http://localhost:8080/images/hotelCannebiere.jpg", 2, 10, new ArrayList<>(), marseille, "", 20));
 
         hotelService.saveHotel(new Hotel(null, "Hotel Georges ", "0231320593", 650.00,
-                "2 boulevard de la Seine", "http://localhost:8080/images/hotelTourEiffel.jpg", 5, 40, new ArrayList<>(), paris));
+                "2 boulevard de la Seine", "http://localhost:8080/images/hotelTourEiffel.jpg", 5, 40, new ArrayList<>(), paris, "", 80));
         hotelService.saveHotel(new Hotel(null, "Hotel Lyon ", "0102030405", 89.00,
-                "2 boulevard des Lumières", "http://localhost:8080/images/hotelLyon.jpg", 2, 40, new ArrayList<>(), lyon));
+                "2 boulevard des Lumières", "http://localhost:8080/images/hotelLyon.jpg", 2, 40, new ArrayList<>(), lyon, "", 60));
         hotelService.saveHotel(new Hotel(null, "Hotel London ", "0231320593", 990.00,
-                "2 boulevard de Londres", "http://localhost:8080/images/hotelLondres.jpg", 5, 30, new ArrayList<>(), londres));
+                "2 boulevard de Londres", "http://localhost:8080/images/hotelLondres.jpg", 5, 30, new ArrayList<>(), londres, "", 55));
         hotelService.saveHotel(new Hotel(null, "Hotel Berlin ", "0231320593", 995.00,
-                "2 boulevard de Munich", "http://localhost:8080/images/hotelBerlin.jpg", 5, 15, new ArrayList<>(), berlin));
+                "2 boulevard de Munich", "http://localhost:8080/images/hotelBerlin.jpg", 5, 15, new ArrayList<>(), berlin, "", 30));
 
 
 

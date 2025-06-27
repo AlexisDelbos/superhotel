@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { IToken } from '../model/token';
 import { City } from '../model/city.model';
 import { User } from '../model/user.model';
+import {Recommandation} from "../model/recommandation.model";
 
 @Injectable({
   providedIn: 'root',
@@ -53,6 +54,10 @@ export class ApiService {
       `http://localhost:8080/api/hotels/${hotelId}/managers/${managerId}`,
       {}
     );
+  }
+
+  public getRecommandations(){
+    return this.httpClient.get<any>(environment.host + '/getrecommandation')
   }
 
   public getManagers() {

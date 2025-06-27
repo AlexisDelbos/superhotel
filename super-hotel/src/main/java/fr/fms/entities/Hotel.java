@@ -29,10 +29,17 @@ public class Hotel implements Serializable {
     private String image;
     private int stars;
     private int availableRooms;
+
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "hotels")
     private Collection<User> managers = new ArrayList<>();
 
 
     @ManyToOne
     private City city;
+
+    @Column(columnDefinition = "TEXT")
+    private String recommendation;
+
+    private int totalRooms;
+
 }

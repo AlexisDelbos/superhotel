@@ -115,4 +115,35 @@
       </div>
     </div>
   </div>
+  <div class="row mt-2">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h5 class="card-title">Recommandation & Taux Occupation des Hôtels</h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Ville</th>
+              <th>Recommandation</th>
+              <th>Taux d'occupation</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let recommendation of recommendations">
+              <td>{{ recommendation.name }}</td>
+              <td>{{ recommendation.cityName }}</td>
+              <td>{{ recommendation.recommendation }}</td>
+              <td>{{ recommendation.occupancyRate + "%" }}</td>
+              <td>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
